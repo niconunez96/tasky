@@ -1,3 +1,5 @@
+#!./env/bin/python
+
 from tasky_app.cli.tasky_entrypoint import parser
 from tasky_app.input_output.task_file_repository import TaskFileRepository
 from tasky_app.domain.task import Task
@@ -6,10 +8,11 @@ from tasky_app.services.task_finder import TaskFinder
 
 def display_task(task: Task):
     icon = "✔️" if task.is_done else "❌"
-    print("{}  {} -- {}".format(
-        icon,
+    print("{}_  {}: {} -- {}".format(
+        task.id,
         task.name,
         task.description,
+        icon,
     ))
 
 

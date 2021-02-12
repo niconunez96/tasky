@@ -9,5 +9,4 @@ class TaskFinder:
         self.repository = repository
 
     def find_all(self) -> List[Task]:
-        import ipdb; ipdb.set_trace()
         return self.repository.find_all()
