@@ -9,7 +9,7 @@ class TaskFileRepository(TaskRepository):
 
     SOURCE_PATH = ""
 
-    def __init__(self, source_path: str):
+    def __init__(self, source_path=""):
         self.SOURCE_PATH = source_path or "tasky_app/db/tasks_db"
 
     def _to_task(self, line: str) -> Task:
@@ -18,8 +18,14 @@ class TaskFileRepository(TaskRepository):
         name = values[1].strip(' ')
         description = values[2].strip(' ')
         author = values[3].strip(' ')
-        done = values[4].strip(' ')
-        return Task(id, name, description, author, done)
+        done = values[4].strip(' ').strip("\n")
+        return Task(
+            id,
+            name,
+            description,
+            author,
+            True if done == "True" else False,
+        )
 
     def save(self, task: Task) -> None:
         with open(self.SOURCE_PATH, "a") as file:

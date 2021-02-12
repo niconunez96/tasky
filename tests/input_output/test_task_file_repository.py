@@ -39,12 +39,12 @@ class TestTaskFileRepository:
         repository.save(task1)
         repository.save(task2)
 
-        task_fetched = repository.find_by_id(1)
+        task_fetched = repository.find_by_id(2)
 
-        assert task_fetched.name == "TODO"
+        assert task_fetched.name == "Another task"
         assert task_fetched.description == "asd"
         assert task_fetched.author == "doe"
-        assert task_fetched.is_done
+        assert not task_fetched.is_done
 
     def test_should_raise_task_not_found_when_id_specified_does_not_exist(
         self,
