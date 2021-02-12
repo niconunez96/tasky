@@ -18,8 +18,8 @@ class TestTaskFileRepository:
         return "tests/db/test_tasks_db"
 
     def test_should_append_task_into_file_when_save_task(self, file_path_test):
-        task1 = Task("TODO", "asd", "doe", True)
-        task2 = Task("Another task", "asd", "doe", False)
+        task1 = Task(1, "TODO", "asd", "doe", True)
+        task2 = Task(2, "Another task", "asd", "doe", False)
 
         repository = TaskFileRepository(file_path_test)
 
@@ -29,12 +29,12 @@ class TestTaskFileRepository:
         with open(file_path_test) as test_file:
             tasks = [line for line in test_file]
 
-        assert tasks[0] == "1, TODO, asd, doe, True"
-        assert tasks[1] == "2, Another task, asd, doe, False"
+        assert tasks[0] == "1, TODO, asd, doe, True\n"
+        assert tasks[1] == "2, Another task, asd, doe, False\n"
 
     def test_should_find_task_with_specified_id(self, file_path_test):
-        task1 = Task("TODO", "asd", "doe", True)
-        task2 = Task("Another task", "asd", "doe", False)
+        task1 = Task(1, "TODO", "asd", "doe", True)
+        task2 = Task(2, "Another task", "asd", "doe", False)
         repository = TaskFileRepository(file_path_test)
         repository.save(task1)
         repository.save(task2)
@@ -56,9 +56,9 @@ class TestTaskFileRepository:
             repository.find_by_id(1)
 
     def test_should_return_all_tasks_from_file(self, file_path_test):
-        task1 = Task("TODO", "asd", "doe", True)
-        task2 = Task("Another task", "asd", "doe", False)
-        task3 = Task("One more task", "asd", "doe", True)
+        task1 = Task(1, "TODO", "asd", "doe", True)
+        task2 = Task(2, "Another task", "asd", "doe", False)
+        task3 = Task(3, "One more task", "asd", "doe", True)
 
         repository = TaskFileRepository(file_path_test)
         repository.save(task1)
@@ -67,4 +67,4 @@ class TestTaskFileRepository:
 
         task_fetched = repository.find_all()
 
-        assert len(task_fetched) == 2
+        assert 3 == len(task_fetched)

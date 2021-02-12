@@ -1,19 +1,28 @@
 class Task:
 
-    done = False
-    name = ""
-    description = ""
-    author = ""
-
-    def __init__(self, name, description, author, done):
+    def __init__(
+        self,
+        id: int,
+        name: str,
+        description: str,
+        author: str,
+        done: bool
+    ):
+        self.id = id
         self.name = name
         self.description = description
         self.author = author
         self.done = done
 
     @staticmethod
-    def create_new(name: str, author: str):
-        return Task(name=name, description="", author=author, done=False)
+    def create_new(id: int, name: str, author: str):
+        return Task(
+            id=id,
+            name=name,
+            description="",
+            author=author,
+            done=False,
+        )
 
     @property
     def is_done(self):
