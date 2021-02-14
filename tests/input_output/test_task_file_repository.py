@@ -18,8 +18,8 @@ class TestTaskFileRepository:
         return "tests/db/test_tasks_db"
 
     def test_should_append_task_into_file_when_save_task(self, file_path_test):
-        task1 = Task(1, "TODO", "asd", "doe", True)
-        task2 = Task(2, "Another task", "asd", "doe", False)
+        task1 = Task(1, "TODO", "asd", True)
+        task2 = Task(2, "Another task", "asd", False)
 
         repository = TaskFileRepository(file_path_test)
 
@@ -29,12 +29,12 @@ class TestTaskFileRepository:
         with open(file_path_test) as test_file:
             tasks = [line for line in test_file]
 
-        assert tasks[0] == "1, TODO, asd, doe, True\n"
-        assert tasks[1] == "2, Another task, asd, doe, False\n"
+        assert tasks[0] == "1, TODO, asd, True\n"
+        assert tasks[1] == "2, Another task, asd, False\n"
 
     def test_should_find_task_with_specified_id(self, file_path_test):
-        task1 = Task(1, "TODO", "asd", "doe", True)
-        task2 = Task(2, "Another task", "asd", "doe", False)
+        task1 = Task(1, "TODO", "asd", True)
+        task2 = Task(2, "Another task", "asd", False)
         repository = TaskFileRepository(file_path_test)
         repository.save(task1)
         repository.save(task2)
@@ -43,7 +43,6 @@ class TestTaskFileRepository:
 
         assert task_fetched.name == "Another task"
         assert task_fetched.description == "asd"
-        assert task_fetched.author == "doe"
         assert not task_fetched.is_done
 
     def test_should_raise_task_not_found_when_id_specified_does_not_exist(
@@ -56,9 +55,9 @@ class TestTaskFileRepository:
             repository.find_by_id(1)
 
     def test_should_return_all_tasks_from_file(self, file_path_test):
-        task1 = Task(1, "TODO", "asd", "doe", True)
-        task2 = Task(2, "Another task", "asd", "doe", False)
-        task3 = Task(3, "One more task", "asd", "doe", True)
+        task1 = Task(1, "TODO", "asd", True)
+        task2 = Task(2, "Another task", "asd", False)
+        task3 = Task(3, "One more task", "asd", True)
 
         repository = TaskFileRepository(file_path_test)
         repository.save(task1)

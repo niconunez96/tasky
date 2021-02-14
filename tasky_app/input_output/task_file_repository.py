@@ -17,23 +17,20 @@ class TaskFileRepository(TaskRepository):
         id = values[0]
         name = values[1].strip(' ')
         description = values[2].strip(' ')
-        author = values[3].strip(' ')
-        done = values[4].strip(' ').strip("\n")
+        done = values[3].strip(' ').strip("\n")
         return Task(
             id,
             name,
             description,
-            author,
             True if done == "True" else False,
         )
 
     def save(self, task: Task) -> None:
         with open(self.SOURCE_PATH, "a") as file:
-            file.write("{}, {}, {}, {}, {}\n".format(
+            file.write("{}, {}, {}, {}\n".format(
                 task.id,
                 task.name,
                 task.description,
-                task.author,
                 task.done,
             ))
 
