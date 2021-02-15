@@ -3,7 +3,7 @@
 from tasky_app.cli.tasky_entrypoint import parser
 from tasky_app.input_output.task_file_repository import TaskFileRepository
 from tasky_app.domain.task import Task
-from tasky_app.services.task_finder import TaskFinder
+from tasky_app.services.task_finder import TasksFinder
 
 
 def display_task(task: Task):
@@ -19,6 +19,6 @@ def display_task(task: Task):
 if __name__ == "__main__":
     arguments = parser.parse_args()
     if arguments.list:
-        tasks = TaskFinder(TaskFileRepository()).find_all()
+        tasks = TasksFinder(TaskFileRepository()).find_all()
         for task in tasks:
             display_task(task)

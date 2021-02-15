@@ -3,7 +3,7 @@ from tasky_app.domain.task import Task
 from tasky_app.domain.task_repository import TaskRepository
 
 
-class TaskFinder:
+class TasksFinder:
 
     def __init__(self, repository: TaskRepository):
         self.repository = repository

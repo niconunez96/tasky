@@ -8,8 +8,6 @@ class TestTaskFileRepository:
 
     @pytest.fixture(scope="function", autouse=True)
     def recreate_tasks_db_file(self):
-        import os
-        os.remove("tests/db/test_tasks_db")
         file = open("tests/db/test_tasks_db", "w")
         file.close()
 
